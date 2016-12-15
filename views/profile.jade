@@ -33,17 +33,17 @@ block content
                         form.form-horizontal.form-label-left(action=nextaction,data-parsley-validate)
                             span.section=docs.Name +''+ (docs.LName==undefined?'':docs.LName)
                             .item.form-group
-                                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                                label.control-label.col-md-3.col-sm-3.col-xs-12(for='Name')
                                     | Имя
                                     span.required *
                                 .col-md-6.col-sm-6.col-xs-12
-                                    input#Name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='Name', placeholder='Введите имя', required='required', type='text',value=docs.Name)
+                                    input#Name.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='Name', placeholder='Введите имя', type='text',value=docs.Name)
                             .item.form-group
-                                label.control-label.col-md-3.col-sm-3.col-xs-12(for='name')
+                                label.control-label.col-md-3.col-sm-3.col-xs-12(for='LName')
                                     | Фамилия
                                     span.required *
                                 .col-md-6.col-sm-6.col-xs-12
-                                    input#Lname.form-control.col-md-7.col-xs-12(data-validate-length-range='6', data-validate-words='2', name='LName', placeholder='Введите фамилию', required='required', type='text',value=docs.LName)
+                                    input#Lname.form-control.col-md-7.col-xs-12(name='LName', placeholder='Введите фамилию', type='text',value=docs.LName)
                             .item.form-group
                                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='email')
                                     | Email
@@ -63,7 +63,7 @@ block content
                                     | Skype
                                     span.required *
                                 .col-md-6.col-sm-6.col-xs-12
-                                    input#skype.form-control.col-md-7.col-xs-12(name='Skype', required='required', value=docs.OtherContacts!=undefined?docs.OtherContacts.Skype:'')
+                                    input#skype.form-control.col-md-7.col-xs-12(name='Skype', value=docs.OtherContacts!=undefined?docs.OtherContacts.Skype:'')
 
                             .ln_solid
                             .form-group
