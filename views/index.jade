@@ -54,5 +54,8 @@ block content
                        td=doc.OtherContacts!=undefined?doc.OtherContacts.Skype:''
                        td.last
                          a(href='/showuser/'+doc._id) Просмотр
-
-
+            .ln_solid
+              .form-group
+                .col-md-2
+                  //button.btn.btn-primary(type='submit') Cancel
+                  button#deleteContacts.btn.btn-success(type='button') Удалить выбранное

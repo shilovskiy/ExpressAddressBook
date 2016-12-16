@@ -6,6 +6,8 @@ var router = express.Router();
 var db = require('../model/db');
 /* GET users profile. */
 
+
+
 router.get('/add', function(req, res, next) {
     let docs=[{Name:'',LName:'',Email:'',Phone:'',Skype:''}];
 
@@ -56,6 +58,27 @@ router.get('/save', function(req, res, next) {
 
 });
 
+router.post('/del', function(req, res, next) {
+    let docs=[{Name:'',LName:'',Email:'',Phone:'',Skype:''}];
+    var collection = db.get().collection('Contacts');
+    for(let ids in req.body){
+        let mongoID= require('mongodb').ObjectID(req.body[ids]);
+        collection.remove({_id:mongoID},
+            (err,deleted)=> {
+                if (err) {
+                    console.log(err);
+                    var err = new Error(err.message);
+                    next(err);
+                } else {
+                    console.log(`deleted ${deleted.length} contact with "_id" are: ${JSON.stringify(deleted)}`);
+                    res.redirect(301,"/");
+                }
+            }
+
+        );
+    }
+});
+
 router.get('/:id', function(req, res, next) {
     let id = require('mongodb').ObjectID(req.params.id);
     let Name = req.query.Name;
@@ -71,21 +94,6 @@ router.get('/:id', function(req, res, next) {
     ,{$set:{'Name':Name,'LName':LName,'Phone':Phone,'OtherContacts.Email':Email,'OtherContacts.Skype':Skype}
 
     });
-    //     .toArray(function (err, docs) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else if (docs.length) {
-    //         console.log('Found:', docs);
-    //
-    //     } else {
-    //         console.log('No document(s) found with defined "find" criteria!');
-    //     }
-    //     res.render('profile', { 'docs': docs[0], 'title':'Адресная книга'} );
-    //     //todo:redirect?
-    //     //Close connection
-    //     //db.close();
-    // });
-
     res.redirect(301,"/");
 });
 

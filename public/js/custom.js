@@ -49,6 +49,31 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
 
+
+
+
+$(document).ready(function(){
+    var rows_selected = [];
+    $('input[type="checkbox"]').on('click', function(e){
+        //alert($(this));
+        rows_selected.push(this.attributes['id'].value);
+    });
+    $('button#deleteContacts').click(function () {
+
+        jQuery.ajax ({
+            url: "/edituserdata/del",
+            type: "POST",
+            data: JSON.stringify(rows_selected),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(){
+                //
+            }
+        });
+        // $.post("/edituserdata/del",JSON.stringify(rows_selected) );
+    });
+});
+
 // Sidebar
 $(document).ready(function() {
     // TODO: This is some kind of easy fix, maybe we can improve this
@@ -188,16 +213,16 @@ $(document).ready(function() {
 // /Switchery
 
 // iCheck
-$(document).ready(function() {
-    if ($("input.flat")[0]) {
-        $(document).ready(function () {
-            $('input.flat').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            });
-        });
-    }
-});
+// $(document).ready(function() {
+//     if ($("input.flat")[0]) {
+//         $(document).ready(function () {
+//             $('input.flat').iCheck({
+//                 checkboxClass: 'icheckbox_flat-green',
+//                 radioClass: 'iradio_flat-green'
+//             });
+//         });
+//     }
+// });
 // /iCheck
 
 // Table
