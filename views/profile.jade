@@ -54,14 +54,12 @@ block content
                             .item.form-group
                                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='number')
                                     | Номер телефона
-                                    span.required *
                                 .col-md-6.col-sm-6.col-xs-12
-                                    input#number.form-control.col-md-7.col-xs-12(type='text', name='Phone',data-parsley-pattern="^(\\+\\d.+)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",placeholder="+7(964) 345-4544" value=docs.Phone)
+                                    input#number.form-control.col-md-7.col-xs-12(type='text', name='Phone',data-parsley-pattern="^(\\+\\d.+)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$", placeholder="+7(964) 345-4544" value=docs.Phone)
                                     span.fa.fa-phone.form-control-feedback.right(aria-hidden='true')
                             .item.form-group
                                 label.control-label.col-md-3.col-sm-3.col-xs-12(for='skype')
                                     | Skype
-                                    span.required *
                                 .col-md-6.col-sm-6.col-xs-12
                                     input#skype.form-control.col-md-7.col-xs-12(name='Skype', value=docs.OtherContacts!=undefined?docs.OtherContacts.Skype:'')
 

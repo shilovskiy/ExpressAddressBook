@@ -62,15 +62,20 @@ $(document).ready(function(){
 
         jQuery.ajax ({
             url: "/edituserdata/del",
-            type: "POST",
+            type: "DELETE",
             data: JSON.stringify(rows_selected),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success: function(){
-                //
+            success: function(res){
+                console.log("deleted row");
+                location.reload();
+            },
+            error: function(err){
+                console.log(err);
+                location.reload();
             }
         });
-        // $.post("/edituserdata/del",JSON.stringify(rows_selected) );
+        //$.post("/edituserdata/del",JSON.stringify(rows_selected) );
     });
 });
 

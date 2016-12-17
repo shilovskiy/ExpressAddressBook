@@ -19,19 +19,19 @@ router.get('/save', function(req, res, next) {
     //let id = require('mongodb').ObjectID(req.params.id);
     let Cntct ={};
     let OtherContacts= {};
-    if (req.query.Name!=undefined){
+    if (req.query.Name!=""){
         Cntct.Name = req.query.Name
     }
-    if (req.query.LName!=undefined){
+    if (req.query.LName!=""){
         Cntct.LName = req.query.LName
     }
-    if (req.query.Phone!=undefined){
+    if (req.query.Phone!=""){
         Cntct.Phone = req.query.Phone
     }
-    if (req.query.Email!=undefined){
+    if (req.query.Email!=""){
         OtherContacts.Email = req.query.Email
     }
-    if (req.query.Skype!=undefined){
+    if (req.query.Skype!=""){
         OtherContacts.Skype = req.query.Skype
     }
     Cntct.OtherContacts=OtherContacts;
@@ -47,7 +47,7 @@ router.get('/save', function(req, res, next) {
     ,(err,reults)=> {
             if (err) {
                 console.log(err);
-                var err = new Error(err.message);
+                var err = new Error("Имя или Фамилия должны быть заполнены ОБЯЗАТЕЛЬНО!!!");
                 next(err);
             } else {
                 console.log(`Inserted ${reults.length} contact with "_id" are: ${JSON.stringify(reults)}`);
@@ -58,26 +58,6 @@ router.get('/save', function(req, res, next) {
 
 });
 
-router.post('/del', function(req, res, next) {
-    let docs=[{Name:'',LName:'',Email:'',Phone:'',Skype:''}];
-    var collection = db.get().collection('Contacts');
-    for(let ids in req.body){
-        let mongoID= require('mongodb').ObjectID(req.body[ids]);
-        collection.remove({_id:mongoID},
-            (err,deleted)=> {
-                if (err) {
-                    console.log(err);
-                    var err = new Error(err.message);
-                    next(err);
-                } else {
-                    console.log(`deleted ${deleted.length} contact with "_id" are: ${JSON.stringify(deleted)}`);
-                    res.redirect(301,"/");
-                }
-            }
-
-        );
-    }
-});
 
 router.get('/:id', function(req, res, next) {
     let id = require('mongodb').ObjectID(req.params.id);
@@ -100,6 +80,30 @@ router.get('/:id', function(req, res, next) {
 
 
 
+router.delete('/del', function(req, res, next) {
+    var collection = db.get().collection('Contacts');
+    for(let ids in req.body){
+        let mongoID= require('mongodb').ObjectID(req.body[ids]);
+        collection.remove({_id:mongoID},
+            (err,deleted)=> {
+                if (err) {
+                    console.log(err);
+                    next(new Error(err.message));
+                } else {
+                    console.log(`deleted ${deleted.length} contact with "_id" are: ${JSON.stringify(deleted)}`);
+                }
+            }
+
+        );
+
+    }
+    // res.redirect("/");
+    res.writeHead(200,'OK',{'Content-Type':'application/json'});
+    res.write(JSON.stringify('{result:OK}'));
+    res.end();
+    //res.send(200);
+
+});
 
 
 

@@ -10,7 +10,11 @@ router.get('/', function(req, res, next) {
 
     var collection = db.get().collection('Contacts');
 
-    collection.find({$or:[{Name:new RegExp(SearchStr,'i')},{Lname:new RegExp(SearchStr,'i')},{Phone:new RegExp(SearchStr,'i')},{Email:new RegExp(SearchStr,'i')}]}).toArray(function (err, docs) {
+    collection.find({$or:[
+     {Name:new RegExp(SearchStr,'i')}
+    ,{Lname:new RegExp(SearchStr,'i')}
+    ,{Phone:new RegExp(SearchStr,'i')}
+    ,{Email:new RegExp(SearchStr,'i')}]}).toArray(function (err, docs) {
         if (err) {
             console.log(err);
         } else if (docs.length) {

@@ -10,7 +10,6 @@ const dburl = "mongodb://localhost:27017/addrBookDB_v1";
 db.connect(dburl,(err)=>{
     if (err) {
         console.log('Unable to connect to Mongo.');
-        //process.exit(1)
     }
 
 });
@@ -35,21 +34,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/showall', index);
 app.use('/showuser', users);
 app.use('/edituserdata', editusers);
 app.use('/newuser', editusers);
 app.use('/search', search);
 
-// app.use('/showuser/:id', (req,resp,next)=>{
-//
-//     let id = req.param.id;
-//
-// });
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Страница не найдена');
   err.status = 404;
   next(err);
 });
